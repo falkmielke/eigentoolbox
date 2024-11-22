@@ -41,42 +41,47 @@ It could have been a good day.
 Just take Python.
 
 - It can use proper OOP tricks.
-- It can be imported from the file, as if it were a package.
+- Code can be imported from any file, as if it was a package.
 - I can give it an alias upon import.
-- Speaking of it: we simply `import`. `library`'s are for geeks, `require` for junkies, `namespace` for bigwigs. I do not feel any of these is right.
-- `NAMESPACE` my ass, we call that `scope`, and it has a logic to it (inner > outer; later import overrides).
-- I could write and run tests as I like, no need to formalize and fail like `devtools::test()`.
+- Speaking of it: we simply `import`. `library`'s are for geeks, `require` for junkies, `namespace` for bigwigs. Neither of these options feel right to me.
+- Speaking of concept overloading: how many `assert`ion packages are there again in R? [Why](https://blog.djnavarro.net/posts/2023-08-08_being-assertive)!?
+- `NAMESPACE` my ass, [we call that `scope`](https://en.wikipedia.org/wiki/Scope_(computer_science)), and it has a logic to it (inner > outer; later = override).
+- Folder structure is flexible, even though there are meaningful conventions.
+- I could write and run tests as I like (and I do), automation is obvious, no need to formalize and fail like `devtools::test()`.
 - If I would want documentation helpers, there's [plenty available](https://wiki.python.org/moin/DocumentationTools) and certainly there's one less annoying than `roxygen2`.
-- I never needed `devtools::check()`. It is the pinnacle of compliance.
+- I never needed `devtools::check()`. It is the pinnacle of compliance [BS](https://callingbullshit.org).
 - I can freely choose my IDE, which is one that improves my efficiency instead of exchanging base flaws for its own ones (*FCK RSTD*).
 
 
 I am grumpy, but am I unfair?
 Do I expect too much?
 I do not think so.
-For example, the `roxygen2` way of documenting stuff is much better than writing any `.Rd` file yourself ("Have you ever written an `Rd`?" // "I do, but I would never want to do that again." *T.O.*).
+For example, the `roxygen2` way of documenting code is much better than writing any `.Rd` file yourself ("Have you ever written an `Rd`?" // "I do, but I would never want to do that again." *T.O.*).
 Yet just because the Pet Stop Boys are better than Justine Biber does not mean that you would want to `@importFrom` either of them, right?
 *I am more of a punk anyways.*
 The problem with `Roxy` is that she tries to be many things at once.
 *Roxy*, which is supposed to be a documentation tool, defines imports and exports in the scope of the package (without the actual import).
 WTF?!
 I know, this is supposed to be good, so that documentation does not get outdated. 
-But then give me a proper `import`.
-Then, downstream, there is exactly *one* way of getting these import tags to the package correctly.
+But that requires a proper, explicit `import`.
+Then, downstream, there is exactly *one* way of filing these import tags to the package correctly, and it is not obvious: I have to read some kind of book by a guru.
 Yes, that *is* necessary: we need consistency of the `roxygen2` tags and a list in the `DESCRIPTION`.
 Why both? Why can't the package just ask `Roxy`?
 Don't ask me.
-I like the packages idea. 
+I like that package's ideas. 
 Yet the details are causing frustrating.
 
 
+On we go.
 Why do we need `usethis` (silly name, btw), could we not just improve the base procedure, instead?
-Why do we need `tibble`s, could we not just improve data frames?
-The `dplyr` people change standards all the time; you might call this a "living language" or "organic development", yet it is annoying devs. 
-In part, these are symptoms of a community failing to converge on good practices, a "zen of R".
+Why do we need `tibble`s, could we not just improve data frames, or go to `data.table` directly?
+I heard that the `dplyr` people change standards infrequently, but all the time; you might call this a "living language" or "organic development", yet it is annoying for maintainers (especially for the deceased ones). 
+
+In part, all these might be symptoms of a community failing to converge on good practices, a "zen of R".
 *The same community who fail to [find a new timeserver since the old one went down at lest four years ago](https://stackoverflow.com/a/63616156), or just de-activate the check for "future file timestamps".*
 And because of that general situation, R repeatedly forces me into inefficient workflows and compliance bullshit.
 > This is how we do it, because this is the way to do it in R.
+
 
 Does anyone ever ask *why* something is some way in R, and change it because it was a shitty idea?
 Is it because HW "look-who-writes-the-longest-pipes" said so?
