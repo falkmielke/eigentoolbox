@@ -2,8 +2,9 @@ Package: eigentoolbox
 Title: Computation Of Eigenanalyses
 Version: 2024.11.22
 Authors@R: 
-    person("Falk", "Mielke", , "falk.mielke@inbo.be", role = c("aut", "cre"),
+    c(person("Falk", "Mielke", , "falk.mielke@inbo.be", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3229-0981"))
+     )
 Description: This package can be used for PCA. More Eigenanalysis methods are to follow. It is the authors first attempt to create a package.
 License: GPL (>= 3)
 Encoding: UTF-8

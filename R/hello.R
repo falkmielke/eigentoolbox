@@ -5,5 +5,5 @@
 #' @export
 #'
 hello <- function() {
-    print("hello, package!")
+    print("hello, `eigentoolbox` package!")
 }
