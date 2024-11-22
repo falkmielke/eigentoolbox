@@ -1,11 +1,6 @@
 
 # Eigentoolbox
 
-<!-- badges: start -->
-  [![R-CMD-check](https://github.com/falkmielke/eigentoolbox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/falkmielke/eigentoolbox/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
-
-
 The goal of eigentoolbox is to perform Eigenanalyses.
 What did you think?
 
@@ -63,17 +58,22 @@ For example, the `roxygen2` way of documenting stuff is much better than writing
 Yet just because the Pet Stop Boys are better than Justine Biber does not mean that you would want to `@importFrom` either of them, right?
 *I am more of a punk anyways.*
 The problem with `Roxy` is that she tries to be many things at once.
-*Roxy* defines imports and exports in the scope of the package.
+*Roxy*, which is supposed to be a documentation tool, defines imports and exports in the scope of the package (without the actual import).
 WTF?!
-And then there is exactly *one* way of getting these import tags to the package correctly.
+I know, this is supposed to be good, so that documentation does not get outdated. 
+But then give me a proper `import`.
+Then, downstream, there is exactly *one* way of getting these import tags to the package correctly.
 Yes, that *is* necessary: we need consistency of the `roxygen2` tags and a list in the `DESCRIPTION`.
-Why both? 
+Why both? Why can't the package just ask `Roxy`?
 Don't ask me.
+I like the packages idea. 
+Yet the details are causing frustrating.
 
 
 Why do we need `usethis` (silly name, btw), could we not just improve the base procedure, instead?
 Why do we need `tibble`s, could we not just improve data frames?
-In part, this is a community failing to converge on good practices, a "zen of R".
+The `dplyr` people change standards all the time; you might call this a "living language" or "organic development", yet it is annoying devs. 
+In part, these are symptoms of a community failing to converge on good practices, a "zen of R".
 *The same community who fail to [find a new timeserver since the old one went down at lest four years ago](https://stackoverflow.com/a/63616156), or just de-activate the check for "future file timestamps".*
 And because of that general situation, R repeatedly forces me into inefficient workflows and compliance bullshit.
 > This is how we do it, because this is the way to do it in R.
@@ -81,8 +81,8 @@ And because of that general situation, R repeatedly forces me into inefficient w
 Does anyone ever ask *why* something is some way in R, and change it because it was a shitty idea?
 Is it because HW "look-who-writes-the-longest-pipes" said so?
 Why do we silently accept that `x` and `y` are classified as *aesthetics* of a plot? 
-They are the freaking *data*!
-*Aesthetic* actually derive from layout, color, symbols, spacing.
+They are the freaking *data*, not the *aesthetics*!
+*Aesthetic* ("nature of beauty and the nature of taste and, in a broad sense, incorporates the philosophy of art", [source: wikipedia](https://en.wikipedia.org/wiki/Aesthetics)) are related to layout, color, symbols, spacing, whereas `x` and `y` are just the table.
 (Something that a `theme_default()` should handle in a good way, shouldn't it?)
 
 There are so many misused words in R that I fear permanent brain miswiring if I have to keep using it.
@@ -148,8 +148,15 @@ library(eigentoolbox)
 
 ## TODO
 
-- [ ] option to standardize
+- [X] quick plot pca via s3 generic methods
+- [ ] option to standardize (center+normalize) input data
 - [ ] dimensionality reduction
 - [ ] trilobite data [as data](https://r-pkgs.org/data.html)
-- [X] quick plot pca via s3 generic methods
+- [ ] why the yaml badge?
 - [ ] ~~inbomd~~ (...is for reports, not vignettes)
+
+
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/falkmielke/eigentoolbox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/falkmielke/eigentoolbox/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+*Note: I don't know why one of the functions gave me this dysfunctional badge.*
