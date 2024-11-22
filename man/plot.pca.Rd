@@ -16,6 +16,10 @@
 )
 }
 \arguments{
+\item{x}{a pca object (see above).}
+
+\item{y}{not used; needed for S3 signature.}
+
 \item{cex}{marker size}
 
 \item{col}{marker fill color}
@@ -26,7 +30,7 @@
 
 \item{ylab}{a title for the y axis}
 
-\item{pca}{a pca object (see above)}
+\item{...}{this is an ellipsis, passed to \code{plot.default}.}
 }
 \value{
 Nothing. Side-effect: plots graphs.

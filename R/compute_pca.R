@@ -94,12 +94,14 @@ compute_pca <- function( data, features = NULL ) {
 #'    https://aksela.wordpress.com/2018/08/18/simple-example-for-creating-a-custom-s3-class-with-methods
 #'    https://www.datamentor.io/r-programming/s3-class
 #'
-#' @param pca a pca object (see above)
+#' @param x a pca object (see above).
+#' @param y not used; needed for S3 signature.
 #' @param cex marker size
 #' @param col marker fill color
 #' @param pch shape of the scatter marker
 #' @param xlab a title for the x axis
 #' @param ylab a title for the y axis
+#' @param ... this is an ellipsis, passed to `plot.default`.
 #' @importFrom graphics plot.default
 #'
 #' @return Nothing. Side-effect: plots graphs.

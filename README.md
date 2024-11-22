@@ -74,7 +74,8 @@ Don't ask me.
 Why do we need `usethis` (silly name, btw), could we not just improve the base procedure, instead?
 Why do we need `tibble`s, could we not just improve data frames?
 In part, this is a community failing to converge on good practices, a "zen of R".
-And because of that situation, with R, I constantly get forced into inefficient workflows and compliance bullshit.
+*The same community who fail to [find a new timeserver since the old one went down at lest four years ago](https://stackoverflow.com/a/63616156), or just de-activate the check for "future file timestamps".*
+And because of that general situation, R repeatedly forces me into inefficient workflows and compliance bullshit.
 > This is how we do it, because this is the way to do it in R.
 
 Does anyone ever ask *why* something is some way in R, and change it because it was a shitty idea?
@@ -114,8 +115,9 @@ The reason we still use it that someone else in the past said "it is good".
 *Rant OFF.*
 
 
-As supporting evidence, I included my previous python code in `./src/EigenToolbox.py`. 
-It is just so much better, simpler, more useful, than this whole package.
+As supporting evidence, I included my previous python code in `./inst/EigenToolbox.py`. 
+(*Do not ask me what `inst` means..., [I just found that on SO](https://stackoverflow.com/a/30794104).*)
+The Python variant is just so much better (as in: simpler to read, more versatile, ...) than this whole package.
 And it took me half the time to build.
 
 
