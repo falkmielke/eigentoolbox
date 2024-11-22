@@ -5,7 +5,9 @@
   [![R-CMD-check](https://github.com/falkmielke/eigentoolbox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/falkmielke/eigentoolbox/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of eigentoolbox is to perform Eigenanalyses
+The goal of eigentoolbox is to perform Eigenanalyses.
+
+> Oh, how I miss Python...
 
 ## Installation
 
@@ -27,6 +29,7 @@ library(eigentoolbox)
 
 ## TODO
 
-- option to standardize
-- dimensionality reduction
-
+- [ ] option to standardize
+- [ ] dimensionality reduction
+- [ ] quick plot pca
+- [ ] inbomd

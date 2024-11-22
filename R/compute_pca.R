@@ -48,21 +48,23 @@ compute_pca <- function( data, features = NULL ) {
     )
   )
 
+  input_ <- data |> select(all_of(features))
 
   # pca list
   pca <- list("features" = features,
-    dim = length(features))
-  class(pca) <- "pca"
+    dim = length(features),
+    raw_data = input_
+    )
+  class(pca) <- c("pca")
 
 
-  input_ <- data |> select(all_of(features))
 
   # center; note: standardization not needed (spatial units)
   pca$means <- input_ |>
     summarize_all(mean)
 
   for (feature in features) {
-    data[, feature] <- data[, feature] - pca$means[[feature]]
+    input_[, feature] <- input_[, feature] - pca$means[[feature]]
   }
 
   pca_input <- as.matrix(input_, wide = TRUE)
@@ -79,4 +81,52 @@ compute_pca <- function( data, features = NULL ) {
 
   # return pca
   return(pca)
+}
+
+
+#' Quick bivariate plot of PCA data.
+#'
+#' Just trying some S3 method overloading,
+#' with defaults for some crucial plot attributes.
+#' see here:
+#'    https://stackoverflow.com/q/13120895
+#'    https://aksela.wordpress.com/2018/08/18/simple-example-for-creating-a-custom-s3-class-with-methods
+#'
+#' @param pca a pca object (see above)
+#'
+#' @return Nothing. Side-effect: plots graphs.
+#'
+#' @importFrom dplyr select all_of summarize_all
+#' @importFrom stats cov
+#'
+#' @method plot pca
+#'
+plot.pca <- function(pca,
+      cex = NULL,
+      col = NULL,
+      pch = NULL,
+      xlab = NULL,
+      ylab = NULL,
+      ...) {
+  data_trafo <- eigentransform( pca$raw_data, pca )
+
+  if (is.null(cex)) {cex =  1}
+  if (is.null(col)) {col = "white"}
+  if (is.null(pch)) {pch = 21}
+  if (is.null(xlab)) {xlab = paste0("PC1 (", w1, "%)")}
+  if (is.null(ylab)) {ylab = paste0("PC2 (", w2, "%)")}
+
+  w1 <- round(100 * pca$val[[1]] / sum(pca$val), 1)
+  w2 <- round(100 * pca$val[[2]] / sum(pca$val), 1)
+
+  plot(
+    x = data_trafo$pc1,
+    y = data_trafo$pc2,
+    cex = cex,
+    pch = pch,
+    xlab = xlab,
+    ylab = ylab,
+    ...
+  )
+
 }

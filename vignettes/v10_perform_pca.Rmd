@@ -102,7 +102,7 @@ Well, ... approximately.
 No analysis without data - so transform the data.
 
 ```{r transform}
-data_trafo <- eigentoolbox::transform( data, pca )
+data_trafo <- eigentransform( data, pca )
 
 summary(data_trafo)
 ```
