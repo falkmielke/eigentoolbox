@@ -11,10 +11,10 @@
 #'
 #' @examples
 #' \dontrun{
-#'   data_trafo <- transform( data, pca )
+#'   data_trafo <- eigentransform( data, pca )
 #' }
 #'
-transform <- function( data, pca ) {
+eigentransform <- function( data, pca ) {
 
   stopifnot(
     assertthat = requireNamespace("assertthat", quietly = TRUE),
@@ -51,7 +51,7 @@ transform <- function( data, pca ) {
   # transformed data
   data_trafo <- as.data.frame(data.frame(
       as.matrix(input_, wide = TRUE) %*% t(pca$mat)
-      )) |> setNames(paste0("PC", 1:pca$dim))
+      )) |> setNames(paste0("pc", 1:pca$dim))
 
   return(data_trafo)
 }
