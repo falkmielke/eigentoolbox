@@ -1,9 +1,24 @@
-# compute a PCA via SVD of the COV
+#' Compute a PCA via svd of the cov.
+#'
+#' @param data a data frame containing numeric features
+#' @param features vector of feature columns (must be numeric)
+#'
+#' @return a pca object to use for (re-)transformation
+#' @export
+#'
+#' @importFrom dplyr select all_of summarize_all
+#' @importFrom stats cov
+#'
+#' @examples
+#'    test_data <- as.data.frame(cbind(1:4, 4:7))
+#'    colnames(test_data) <- c("feat1", "feat2")
+#'    test_pca <- compute_pca(test_data)
+#'
 compute_pca <- function( data, features = NULL ) {
 
   stopifnot(
     assertthat = requireNamespace("assertthat", quietly = TRUE),
-    dplyr = require("dplyr", quietly = TRUE)
+    dplyr = requireNamespace("dplyr", quietly = TRUE)
   )
 
   assertthat::assert_that(
@@ -40,10 +55,10 @@ compute_pca <- function( data, features = NULL ) {
   class(pca) <- "pca"
 
 
-  input_ <- data %>% select(all_of(features))
+  input_ <- data |> select(all_of(features))
 
   # center; note: standardization not needed (spatial units)
-  pca$means <- input_ %>%
+  pca$means <- input_ |>
     summarize_all(mean)
 
   for (feature in features) {

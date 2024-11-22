@@ -1,10 +1,22 @@
 
-# Un-apply the PCA
+#' Reverse transform loadings to data with the PCA.
+#'
+#' @param data_trafo data.frame points in pca space
+#' @param pca the pca object defining transformed space.
+#'
+#' @return retransformed data (data.frame)
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   data_retrafo <- retrafo( data_trafo, pca )
+#' }
+#'
 retrafo <- function( data_trafo, pca ) {
 
   stopifnot(
     assertthat = requireNamespace("assertthat", quietly = TRUE),
-    dplyr = require("dplyr", quietly = TRUE)
+    dplyr = requireNamespace("dplyr", quietly = TRUE)
   )
 
   assertthat::assert_that(

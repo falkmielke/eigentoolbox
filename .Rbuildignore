@@ -1,3 +1,5 @@
 ^\.github$
 ^LICENSE\.md$
 ^.*[.]Rproj$
+^.*\.Rproj$
+^\.Rproj\.user$

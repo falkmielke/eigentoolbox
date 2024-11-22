@@ -1,10 +1,24 @@
 
-# Apply the PCA
+#' Apply a PCA to data.
+#'
+#' @param data a data frame with data to be transformed.
+#' @param pca the pca object used for transformation.
+#'
+#' @return transformed data (data.frame)
+#' @export
+#'
+#' @importFrom stats setNames
+#'
+#' @examples
+#' \dontrun{
+#'   data_trafo <- transform( data, pca )
+#' }
+#'
 transform <- function( data, pca ) {
 
   stopifnot(
     assertthat = requireNamespace("assertthat", quietly = TRUE),
-    dplyr = require("dplyr", quietly = TRUE)
+    dplyr = requireNamespace("dplyr", quietly = TRUE)
   )
 
   assertthat::assert_that(
@@ -22,12 +36,12 @@ transform <- function( data, pca ) {
     msg = paste0(
       "Some features are no coluns: ",
       paste0(
-        features[is.na(match(features, colnames(data)))],
+        pca$features[is.na(match(pca$features, colnames(data)))],
         collapse = ", ")
     )
   )
 
-  input_ <- data %>% select(all_of(pca$features))
+  input_ <- data |> select(all_of(pca$features))
 
   # centering
   for (feature in pca$features) {
@@ -37,7 +51,7 @@ transform <- function( data, pca ) {
   # transformed data
   data_trafo <- as.data.frame(data.frame(
       as.matrix(input_, wide = TRUE) %*% t(pca$mat)
-      )) %>% setNames(paste0("PC", 1:pca$dim))
+      )) |> setNames(paste0("PC", 1:pca$dim))
 
   return(data_trafo)
 }
