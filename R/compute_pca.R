@@ -84,6 +84,7 @@ compute_pca <- function( data, features = NULL ) {
 }
 
 
+
 #' Quick bivariate plot of PCA data.
 #'
 #' Just trying some S3 method overloading,
@@ -91,24 +92,32 @@ compute_pca <- function( data, features = NULL ) {
 #' see here:
 #'    https://stackoverflow.com/q/13120895
 #'    https://aksela.wordpress.com/2018/08/18/simple-example-for-creating-a-custom-s3-class-with-methods
+#'    https://www.datamentor.io/r-programming/s3-class
 #'
 #' @param pca a pca object (see above)
+#' @param cex marker size
+#' @param col marker fill color
+#' @param pch shape of the scatter marker
+#' @param xlab a title for the x axis
+#' @param ylab a title for the y axis
+#' @importFrom graphics plot.default
 #'
 #' @return Nothing. Side-effect: plots graphs.
+#' @export
 #'
-#' @importFrom dplyr select all_of summarize_all
-#' @importFrom stats cov
-#'
-#' @method plot pca
-#'
-plot.pca <- function(pca,
+plot.pca <- function(x,
+      y = NULL,
       cex = NULL,
       col = NULL,
       pch = NULL,
       xlab = NULL,
       ylab = NULL,
       ...) {
+
+  pca <- x
   data_trafo <- eigentransform( pca$raw_data, pca )
+  w1 <- round(100 * pca$val[[1]] / sum(pca$val), 1)
+  w2 <- round(100 * pca$val[[2]] / sum(pca$val), 1)
 
   if (is.null(cex)) {cex =  1}
   if (is.null(col)) {col = "white"}
@@ -116,10 +125,8 @@ plot.pca <- function(pca,
   if (is.null(xlab)) {xlab = paste0("PC1 (", w1, "%)")}
   if (is.null(ylab)) {ylab = paste0("PC2 (", w2, "%)")}
 
-  w1 <- round(100 * pca$val[[1]] / sum(pca$val), 1)
-  w2 <- round(100 * pca$val[[2]] / sum(pca$val), 1)
 
-  plot(
+  plot.default(
     x = data_trafo$pc1,
     y = data_trafo$pc2,
     cex = cex,

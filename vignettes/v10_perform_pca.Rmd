@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+.libPaths("/data/R/library")
 library("eigentoolbox")
 # devtools::load_all()
 ```
@@ -68,7 +69,7 @@ First, perform the SVD of the covariance matrix.
 
 ```{r pca}
 pca <- compute_pca(data)
-summary(data)
+plot(pca)
 ```
 
 
@@ -93,7 +94,8 @@ colnames(test) <- c("i", "ev", "l1", "l2", "l3")
 knitr::kable(test)
 ```
 
-Well, ... approximately.
+Well, ... approximately. 
+I guess the displayed table data was rounded.
 
 
 

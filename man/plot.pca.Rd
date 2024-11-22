@@ -4,9 +4,28 @@
 \alias{plot.pca}
 \title{Quick bivariate plot of PCA data.}
 \usage{
-\method{plot}{pca}(pca, cex = NULL, col = NULL, pch = NULL, xlab = NULL, ylab = NULL, ...)
+\method{plot}{pca}(
+  x,
+  y = NULL,
+  cex = NULL,
+  col = NULL,
+  pch = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  ...
+)
 }
 \arguments{
+\item{cex}{marker size}
+
+\item{col}{marker fill color}
+
+\item{pch}{shape of the scatter marker}
+
+\item{xlab}{a title for the x axis}
+
+\item{ylab}{a title for the y axis}
+
 \item{pca}{a pca object (see above)}
 }
 \value{
@@ -18,4 +37,5 @@ with defaults for some crucial plot attributes.
 see here:
 https://stackoverflow.com/q/13120895
 https://aksela.wordpress.com/2018/08/18/simple-example-for-creating-a-custom-s3-class-with-methods
+https://www.datamentor.io/r-programming/s3-class
 }
