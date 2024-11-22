@@ -24,3 +24,9 @@ library(eigentoolbox)
 ## basic example code
 ```
 
+
+## TODO
+
+- option to standardize
+- dimensionality reduction
+

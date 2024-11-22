@@ -1,0 +1,134 @@
+---
+title: "Perform Principal Component Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{v10_perform_pca}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library("eigentoolbox")
+# devtools::load_all()
+```
+
+
+Quick and dirty Eigenanalysis, Part One: **PCA**.
+
+
+## data
+We need a data set. 
+Since I first learned this from a text by Prof. Norm MacLeod [1], I will stick with his data
+(although, note that there is a comma-dot typo in the `Sphaerexochus` line of the web table, and the mean body length differs, but *so what*).
+
+```{r data}
+trilobite_text = "genus,body_length_mm,glabellar_length_mm,glabellar_width_mm
+Acaste,23.14,3.50,3.77
+Balizoma,14.32,3.97,4.08
+Calymene,51.69,10.91,10.72
+Ceraurus,21.15,4.90,4.69
+Cheirurus,31.74,9.33,12.11
+Cybantyx,26.81,11.35,10.10
+Cybeloides,25.13,6.39,6.81
+Dalmanites,32.93,8.46,6.08
+Delphion,21.81,6.92,9.01
+Ormathops,13.88,5.03,4.34
+Phacopdina,21.43,7.03,6.79
+Phacops,27.23,5.30,8.19
+Placopoaria,38.15,9.40,8.71
+Pricyclopyge,40.11,14.98,12.98
+Ptychoparia,62.17,12.25,8.71
+Rhenops,55.94,19.00,13.10
+Sphaerexochus,23.31,3.84,4.60
+Toxochasmops,46.12,8.15,11.42
+Trimerus,89.43,23.18,21.52
+Zacanthoides,47.89,13.56,11.78
+"
+
+data <- read.table(
+    text = trilobite_text,
+    sep = ",",
+    header = TRUE,
+    stringsAsFactors = FALSE
+)
+
+summary(data)
+```
+
+## Calculation
+
+First, perform the SVD of the covariance matrix.
+
+```{r pca}
+pca <- compute_pca(data)
+summary(data)
+```
+
+
+Does this PCA match the referenced one?
+```{r}
+reference <- read.table(
+    text = "1,383.08, 0.951,0.244,0.192
+            2,  7.46, 0.310,0.700,0.644
+            3,  2.00,−0.023,0.671,0.741",
+    sep = ",",
+    header = FALSE,
+    stringsAsFactors = FALSE
+)
+colnames(reference) <- c("i", "ev", "l1", "l2", "l3")
+knitr::kable(reference)
+```
+
+
+```{r pca_matrix_match}
+test <- cbind(1:3, pca$val, t(pca$mat))
+colnames(test) <- c("i", "ev", "l1", "l2", "l3")
+knitr::kable(test)
+```
+
+Well, ... approximately.
+
+
+
+## Forward Trafo
+
+No analysis without data - so transform the data.
+
+```{r transform}
+data_trafo <- transform( data, pca )
+
+summary(data_trafo)
+```
+
+## Inverse Trafo
+
+Transformation can be undone:
+
+```{r retransform}
+data_retrafo <- retrafo( data_trafo, pca )
+
+summary(data_retrafo)
+```
+
+
+Did we correctly invert?
+
+```{r}
+sum(data[, pca$features] - data_retrafo)
+```
+
+
+This is clearly the "minimum expected, sufficient success" (MESS™).
+
+
+
+## References
+
+- [1] Norm MacLeod (2005): "PalaeoMath: Part 5 - PCA, Eigenanalysis & Regression V", Palaeontology Newsletter, edition Nº 59. https://www.palass.org/publications/newsletter/palaeomath-101/palaeomath-part-5-pca-eigenanalysis-regression-v
