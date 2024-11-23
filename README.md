@@ -72,6 +72,20 @@ I like that package's ideas.
 Yet the details are causing frustrating.
 
 
+It is not always in the details.
+Often, it is the big picture.
+OOP is quasi dysfunctional (no multiple inheritance, no interfacing, multiple implementations bad at different aspects), yet on S3, they call this "flexible".
+You might think R as rather "functial programming oriented"?
+Think again, but only one thought at a time!
+Granted, R has `dict`s built into their vectors, yet the cool thing about python dicts is the ability to subclass them, defaults, magic functions; there are also `list`s and `set`s with comprehensive functionality. 
+And ease of use: I would always prefer `{}` over `c()`.
+It's mind-boggling that you can put `names(vec) <-` on the left handside; but I never needed it.
+If the `__name__` is equal to the `__main__`, I am happy, which is to say that python also has its quirks.
+Yet for one reason or another, I could live with those.
+> Oh, how I miss my dictionaries.
+I miss listcomprehension. Dict comprehension. Generators...
+
+
 On we go.
 Why do we need `usethis` (silly name, btw), could we not just improve the base procedure, instead?
 Why do we need `tibble`s, could we not just improve data frames, or go to `data.table` directly?
