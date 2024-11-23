@@ -77,13 +77,17 @@ Often, it is the big picture.
 OOP is quasi dysfunctional (no multiple inheritance, no interfacing, multiple implementations bad at different aspects), yet on S3, they call this "flexible".
 You might think R as rather "functial programming oriented"?
 Think again, but only one thought at a time!
-Granted, R has `dict`s built into their vectors, yet the cool thing about python dicts is the ability to subclass them, defaults, magic functions; there are also `list`s and `set`s with comprehensive functionality. 
-And ease of use: I would always prefer `{}` over `c()`.
+Granted, R has `dict`s built into their vectors.
+However, the cool thing about python dicts is on the usage side: the ability to subclass them, defaults, magic functions, `**kwargs`; there are also `list`s and `set`s with comprehensive functionality. 
+I miss list comprehension. Dict comprehension. Generators...
+And ease of use.
+I would always prefer `{}` over `c()`. `[]` over `c()`. Occasionally even `()`.
 It's mind-boggling that you can put `names(vec) <-` on the left handside; but I never needed it.
 If the `__name__` is equal to the `__main__`, I am happy, which is to say that python also has its quirks.
+Pythons quirks are often under de hood (e.g. loops are slow), they are like the `bokeh`. 
+And they are linked to readability, and educational advantages; another area where R does not `shiny`.
 Yet for one reason or another, I could live with those.
 > Oh, how I miss my dictionaries.
-I miss listcomprehension. Dict comprehension. Generators...
 
 
 On we go.
@@ -106,6 +110,9 @@ They are the freaking *data*, not the *aesthetics*!
 
 There are so many misused words in R that I fear permanent brain miswiring if I have to keep using it.
 [We are fucked.](https://theonion.com/expert-explains-why-essentially-youre-fucked)
+Probably, Python has also spoiled my brain: for example I like accurate indentations.
+But back then it felt good.
+Now, it feels like a waste of time.
 
 
 Calm down, Falk. 
