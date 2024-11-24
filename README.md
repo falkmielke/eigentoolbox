@@ -27,20 +27,23 @@ And, mind, I learned `basic`, `tp`, `excel`, `java` and `matlab` before at some 
 
 The frustration has reasons, and seems to be here to stay:
 Normally, when I am stuck on programming, there is a point when I find the overlooked bug (often learned a novel concept on the way).
-Finally, all the gears in the motor move and the thing works as intended, and my brain fires dopamine.
+The moment that finally, all the gears in the motor move and the thing works as intended, and my brain fires dopamine.
 You get paid off for enduring your frustration.
 With R, and `devtools`, I was also quite happy to get a simple PCA to work - yet the "bugs" I was hunting were just syntax details the linter didn't like. 
 Self-made problems.
 
-Acknowledged: this work was biased towards more structure and less content, because I had implemented that algorithm a couple of times before.
+
+Acknowledged: my task here was biased towards more structure and less content, because I had implemented that algorithm a couple of times before.
 The core of Eigenanalysis is tiny.
 Still, net outcome: nothing of general relevance learned, nothing improved, just fought compliance bullshit.
-> I meticulously noted all the steps of package generation, and still I have exactly zero confidence that `devtools::check()` will succeed after that hour of knitting on my next project. 
 
-What remains is a reluctance to ever build a package in R again.
+
+I meticulously noted all the steps of package generation, and still, for my next project, I have exactly zero confidence that `devtools::check()` will succeed after that hour of "knitting". 
+
+
+What remains is an immediate reluctance to ever build a package in R again.
 Of course I will learn the conventions, and adapt my habits. 
-But I do not feel like this is going to benefit my general programming skills.
-
+But I do not feel like this is going to benefit my general programming skills, or work efficiency.
 
 There are many aspects that made my mood explode today.
 It could have been a good day.
@@ -49,15 +52,15 @@ Just take Python, for comparison.
 - It can use proper OOP tricks.
 - Code can be imported from any file, as if it was a package - no need to formalize (note: this is not equivalent to `source("script.R")`).
 - I can give it an alias upon import, or import only part of it.
-- Speaking of import: in Python, we simply `import`. A `library` is a place for geeks, `require` a habit of junkies, `namespace` is for bigwigs. Neither of these options feel attractive to me.
+- Speaking of import: in Python, we simply `import`. A `library` is a place for geeks, `require` a habit of junkies, `namespace` is for bigwigs. Neither of these options feel sexy to me.
 - Speaking of concept overloading: how many `assert`ion packages are there again in R? [Why](https://blog.djnavarro.net/posts/2023-08-08_being-assertive)!?
-- `NAMESPACE` my ass, [software engineers call that `scope`](https://en.wikipedia.org/wiki/Scope_(computer_science)), and it has a logic to it (inner > outer; later = override). Let's not get started about the `environment`; I work at an environmental research agency.
-- Folder structure in Python is flexible, even though there are meaningful conventions.
+- `NAMESPACE` my ass, [software engineers call that `scope`](https://en.wikipedia.org/wiki/Scope_(computer_science)), and it has a logic to it (inner > outer; later = override). Let's not get started about the `environment`; I work at an environmental research agency. And who thought it would be a good idea to have a non-sync, volatile `workspace`?
+- Folder structure in Python is flexible, even though there are meaningful conventions (though, acknowledged, I never felt the need to look up conventions for PyPI).
 - I could write and run tests as I like (and I do), automation is obvious, no need to formalize and fail like `devtools::test()`.
-- Parallel processing is real, even if it is actually `asyncio`.
-- If I would want documentation helpers, there are [plenty available](https://wiki.python.org/moin/DocumentationTools) and certainly there is one less annoying than `roxygen2`.
+- Parallel processing is real -- even in case you actually use `asyncio`.
+- If I would want documentation helpers, there are [plenty available](https://wiki.python.org/moin/DocumentationTools) and certainly there is one less annoying than `roxygen2`. See below.
 - I never needed `devtools::check()`. It is the pinnacle of compliance [BS](https://callingbullshit.org).
-- I can freely choose my IDE, which is one that improves my efficiency instead of exchanging base flaws for its own ones (*FCK RSTD*).
+- I can freely choose my Python IDE, which is one that improves my efficiency instead of exchanging each base flaw for two of its own ones (*FCK RSTD*).
 
 
 Yes, I am grumpy, but am I unfair?
@@ -70,14 +73,20 @@ Yet just because the Pet Stop Boys are better than Justine Biber does not mean t
 The problem with `Roxy` is that she tries to be many things at once.
 *Roxy*, which is supposed to be a documentation tool, defines imports and exports in the scope of the package (i.e. it imports, from a comment-like line, without the explicit call to `library()`).
 WTF?!
-Then, downstream, there is exactly *one* way of filing these import tags to the package correctly, and it is not obvious: I have to read some kind of book by a guru.
-I understand, this is supposed to be good, so that documentation does not get outdated. 
+Then, downstream, there is exactly *one* way of filing these import tags to the package correctly, and it is not obvious, nor intuitive: I surely have to read some bookdown book by some R guru to understand it.
+I understand, this functionality is supposed to be good, so that documentation does not get outdated. 
 Yes, consistency *is* necessary: we need consistency of the `roxygen2` tags and a list in the `DESCRIPTION`.
-But that check should be between a proper, explicit `import` on the one hand, and pachage `requirements.txt` on the other.
+But that check should be between a proper, explicit `import` on the one hand, and package `requirements.txt` on the other.
 In my opinion, this is not a task for the documentation parser.
-Don't ask me.
-I like (both) the basic ideas of that package. 
+
+I think it would be good to have (i) a documentation parser, (ii) central imports for a package, and (iii) a consistency checker.
+In principle, I like (both) the basic ideas of that package. 
 Yet the implementation details are causing frustrating.
+
+Just like the recently implemented, frustrating "native pipe" `|>` (See? Base R changes *sometimes...*). 
+Nice that it is there, ["deliberately simple"](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe), but it is still much less comprehensive than the [`magrittr` pipe `%>%`](https://magrittr.tidyverse.org) (e.g. changing argument position, lazy execution).
+So I find myself still using `%>%`.
+Can't say they did not have a chance to make it right!
 
 
 It is not always in the details.
@@ -85,6 +94,7 @@ Often, it is the big picture, too.
 OOP is quasi dysfunctional (no multiple inheritance, no interfacing, multiple implementations with meaningless S and R letters, all bad at different aspects), yet on S3, they call this "flexible".
 You might think R as rather "functial programming oriented"?
 Think again, but please return only one thought at a time!
+
 
 Or take the actual bread-and-butter tools at our disposal.
 Granted, R has `dict`s built into their `c("name" = value)` vectors.
@@ -97,6 +107,11 @@ If the `__name__` is equal to the `__main__`, I am happy, which is to say that p
 Pythons quirks are often under de hood (e.g. loops are slow), they are like the `bokeh` of a good photo, they are not in front and focus. 
 And they are linked to **readability**, and educational advantages; another area where R does not `shiny`.
 For one reason or another, Python quirks never bothered me.
+I have also tried a bit of `C` and `C++`; I was even more helpless than with R, but felt that I could rule the world if I continued it. 
+That route, you clearly expect complicated programming and technical syntax, as the trade-in for power and efficiency.
+Python leans towards usability.
+R is the worst of both worlds: it is neither efficient, nor user-friendly.
+
 > Oh, how I miss my dictionaries.
 
 
@@ -109,22 +124,23 @@ In part, all these might be symptoms of a community failing to converge on good 
 *The same community who fail to [find a new timeserver since the old one went down at lest four years ago](https://stackoverflow.com/a/63616156), or to just de-activate the check for "future file timestamps" to leave that for the user.*
 And because of that general situation, R repeatedly forces me into inefficient workflows and compliance bullshit.
 It actively drains my time. 
+
 > "This is how we do it, not because it is logical, but because this is the way to do it in R."
 I left Excel behind for the same reason, long ago.
 
 
 When was the last time that someone asked *why* something is some way in R, and then changed it from scratch because it was a shitty idea to begin with?
-Do we do things just because HW "look-who-writes-the-longest-pipes" said so?
+Do we do things just because HW or anyone else said so?
 For example, why do we silently accept that `x` and `y` are classified as *aesthetics* of a plot? 
 They are the freaking *data*, not the *aesthetics*!
-*Aesthetic* (the "nature of beauty and the nature of taste and, in a broad sense, incorporates the philosophy of art", [source: wikipedia](https://en.wikipedia.org/wiki/Aesthetics)) are related to layout, color, symbols, spacing; whereas `x` and `y` are just the table.
-(All things that a `theme_default()` should handle in a *good* way, shouldn't it?)
+*Aesthetic* (the "nature of beauty and the nature of taste and, in a broad sense, incorporates the philosophy of art", [source: wikipedia](https://en.wikipedia.org/wiki/Aesthetics)) are related to layout, color, symbols, spacing; whereas `x` and `y` are just the table, and very unaesthetically so.
+(By the way, aesthetics are all things that a `theme_default()` should handle in a *good* way, shouldn't it?)
 
 There are so many misused words in R that I fear permanent brain miswiring if I have to keep using it.
-[We are fucked.](https://theonion.com/expert-explains-why-essentially-youre-fucked)
-Probably, Python has also spoiled my brain: for example, I like accurate indentations, and I am fine with it being enforced on me.
-But, back when I learned it, the Python loss-of-freedom felt good, and I could make sense of it (e.g. less need for brackets).
-Now, R loss-of-freedom feels like a waste of time, because I do not see the use and logic of conformity.
+([*I saw a fitting video recently and just wanted to link it...*](https://theonion.com/expert-explains-why-essentially-youre-fucked))
+Probably, Python has also spoiled my brain: for example, I like accurate indentations, and I am fine with them being enforced on me.
+But, back when I learned it, the Python loss-of-freedom felt good, and I could rationalize it (e.g. less need for brackets).
+Now, R loss-of-freedom feels like a waste of time, because I do not see the use or logic of conformity.
 Acknowledged, this is, for a large part, caused by my spoiled brain.
 
 
@@ -136,9 +152,8 @@ There are conventions and syntax restrictions in Python or C as well.
 *But they usually empower you, because they are few, consistent, logical, and helpful (e.g. by shifting runtime errors to compile time).*
 In python, there are only a handful of keywords to know: `def`, `class`, `assert`, brackets, control flow.
 In R, syntax restrictions come from the limitations of the software.
-Fun fact: if you dig deeper, you will find that all the good R packages are actually written in C (also in Python, I know, bit then the strength if the snake is its elegance).
+Fun fact: if you dig deeper, you will find that all the good R packages are actually written in C (also in Python, I know, bit then, again, the strength of that snake is its elegance).
 And, boy, did I enjoy programming Stan models last week: it is logical, and works as expected; simple, yet powerful; it just does what you say.
-
 
 Where I used to think (e.g. on `@descriptors`, `generators`, any of the advanced topics):
 > Hmmm, that's clever!
@@ -146,8 +161,9 @@ R, at its full glory, makes me think
 > Hmm, that makes another shit less shitty, but it is still not exactly what I would want it to do.
 
 
-Nobody in their sane minds would choose R, if they had a choice.
-The reason we still use it that someone else in the past said "it is good".
+Working hypothesis: nobody in their sane minds would choose R, if they had a choice.
+The only reason we still use it that we are still using it.
+Someone else in the past said "it is good".
 
 
 > Oh, how I miss Python...
